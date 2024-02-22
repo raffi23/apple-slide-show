@@ -52,13 +52,13 @@ const Player = () => {
       pause();
       return;
     }
-    setProgress(0);
-    setSelectedVideo(videos[(playingIndex + 1) % videos.length]);
+    setTimeout(() => {
+      playAt((playingIndex + 1) % videos.length);
+    }, 500);
   };
 
   const repeat = () => {
-    setProgress(0);
-    setSelectedVideo(videos[0]);
+    playAt(0);
   };
 
   const playAt = (index: number) => {
@@ -90,6 +90,7 @@ const Player = () => {
               bounce: 0,
               duration: 1,
             }}
+            onAnimationComplete={play}
             onViewportEnter={play}
             onViewportLeave={pause}
             viewport={{ amount: 0.25 }}
@@ -100,15 +101,17 @@ const Player = () => {
               ))}
             </div>
 
-            <video
-              ref={(ref) => (videoRef.current = ref)}
+            <motion.video
+              ref={(ref) => {
+                if (ref) videoRef.current = ref;
+              }}
               className="h-full w-full bg-black object-cover"
               src={selectedVideo.src}
               muted
               onTimeUpdate={updateProgress}
               onEnded={nextVideo}
               onClick={playing ? pause : play}
-            ></video>
+            ></motion.video>
           </motion.div>
         </AnimatePresence>
       </div>

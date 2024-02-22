@@ -24,7 +24,7 @@ const Controls: FC = () => {
         { transform: `translate(-50%,-50%) scale(1)` },
         { duration: 0.35, delay: 0.1 },
       ],
-      ["#progress", { transform: "translateX(calc(-50% - 36px))" }],
+      ["#progress", { transform: ["translateX(-50%)", "translateX(calc(-50% - 36px))"] }],
       [
         "#blue",
         { transform: `translate(-50%,-50%) scale(0)`, opacity: 0 },
@@ -32,7 +32,7 @@ const Controls: FC = () => {
       ],
       ["button", { opacity: 1 }, { at: "<" }],
       ["#repeat", { transform: "translateX(calc(-50% + 92px))" }, { at: "<" }],
-      ["#progress", { width: 180 }, { at: "<" }],
+      ["#progress", { width: [56, 180] }, { at: "<" }],
       ["#progress", { width: 168 }],
     ]);
   }, [scope, animate]);
