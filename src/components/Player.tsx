@@ -90,7 +90,7 @@ const Player = () => {
               bounce: 0,
               duration: 1,
             }}
-            onAnimationComplete={play}
+            onAnimationComplete={playingIndex > 0 ? play : undefined}
             onViewportEnter={play}
             onViewportLeave={pause}
             viewport={{ amount: 0.25 }}
